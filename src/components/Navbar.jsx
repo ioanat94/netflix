@@ -8,14 +8,12 @@ import {
 import React, { useState } from 'react';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState('false');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-
-  console.log(isScrolled);
 
   return (
     <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
