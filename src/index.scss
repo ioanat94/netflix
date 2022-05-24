@@ -56,10 +56,10 @@ body {
 
       span {
         transition: all 0.4s ease;
-      }
 
-      span:hover {
-        color: #8f8f8f;
+        &:hover {
+          color: #8f8f8f;
+        }
       }
     }
 
@@ -69,10 +69,6 @@ body {
       }
 
       .dropdown {
-        -webkit-transition: all 0.4s ease;
-        -moz-transition: all 0.4s ease;
-        -ms-transition: all 0.4s ease;
-        -o-transition: all 0.4s ease;
         transition: all 0.4s ease;
       }
 
@@ -218,6 +214,10 @@ body {
   width: 100%;
   position: relative;
   top: -175px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 
   .listTitle {
     color: white;
@@ -229,27 +229,59 @@ body {
   .wrapper {
     position: relative;
 
-    .sliderArrow {
+    .arrowWrapper {
       width: 30px;
-      height: 30px;
+      height: 100%;
+      padding: 0 15px;
       color: white;
       position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
       transition: all 0.1s linear;
       cursor: pointer;
+      z-index: 99;
 
       &.left {
-        left: 15px;
-        top: 55px;
+        left: 0px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
       }
 
       &.right {
-        right: 15px;
-        top: 55px;
+        right: 0px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+
+      &:hover {
+        background-color: rgb(22, 22, 22, 0.5);
       }
     }
 
-    .sliderArrow:hover {
-      transform: scale(1.2);
+    .sliderArrow {
+      width: 30px;
+      height: 100%;
+      padding: 0 15px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      transition: all 0.1s linear;
+      cursor: pointer;
+      z-index: 99;
+
+      &.left {
+        left: 0px;
+      }
+
+      &.right {
+        right: 0px;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
 
     .container {
@@ -257,13 +289,22 @@ body {
       display: flex;
       gap: 8px;
       width: max-content;
+      transition: all 0.5s ease;
     }
   }
 }
 
 .listItem {
   width: 240px;
-  height: 140px;
-  background-color: rgba(255, 255, 255, 0.233);
+  height: 135px;
+  background-color: var(--main-color);
   border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
