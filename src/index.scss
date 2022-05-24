@@ -8,7 +8,7 @@ body {
 }
 
 :root {
-  --main-color: #0b0b0b;
+  --main-color: #141414;
 }
 
 .home {
@@ -187,11 +187,19 @@ body {
   .play {
     background-color: white;
     padding-right: 35px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.678);
+    }
   }
 
   .more {
     color: white;
     background-color: #cfcfcf2f;
+
+    &:hover {
+      background-color: #cfcfcf18;
+    }
   }
 
   .feat-icon {
@@ -301,10 +309,109 @@ body {
   border-radius: 3px;
   overflow: hidden;
   cursor: pointer;
+  color: white;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  video {
+    width: 100%;
+    height: 202.5px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    z-index: 99;
+    width: 360px;
+    height: 360px;
+    position: absolute;
+    top: -120px;
+    box-shadow: -10px 0px 13px -7px #0000004f, 10px 0px 13px -7px #0000004f,
+      5px 5px 0px -30px rgba(0, 0, 0, 0), 0px 10px 13px -7px #0000004f;
+
+    img {
+      height: 202.5px;
+    }
+
+    .itemInfo {
+      margin-left: 20px;
+      width: 100%;
+      height: 157.5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .icons {
+        display: flex;
+        gap: 8px;
+
+        .play {
+          padding: 5px;
+          background-color: white;
+          color: var(--main-color);
+          border-radius: 50%;
+          font-size: 28px;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.678);
+          }
+        }
+
+        .add,
+        .thumbsUp {
+          padding: 5px;
+          border: 2px solid #818181;
+          border-radius: 50%;
+
+          &:hover {
+            border: 2px solid white;
+            background-color: #272727;
+          }
+        }
+      }
+
+      .itemInfoTop {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .match {
+          color: rgb(82, 212, 82);
+          font-weight: 700;
+        }
+
+        .duration {
+          font-weight: 700;
+        }
+
+        .bordered {
+          padding: 2px 8px;
+          border: 1px solid #8f8f8f;
+
+          &.hd {
+            font-size: 10px;
+          }
+        }
+      }
+
+      .tags {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 500;
+
+        .delimiter {
+          font-size: 30px;
+          color: #8f8f8f;
+        }
+      }
+    }
   }
 }
