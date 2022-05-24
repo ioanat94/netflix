@@ -13,6 +13,7 @@ body {
 
 .home {
   background-color: var(--main-color);
+  overflow: hidden;
 }
 
 .navbar {
@@ -21,6 +22,7 @@ body {
   font-size: 14px;
   position: fixed;
   top: 0;
+  z-index: 999;
 
   &.scrolled {
     background-color: var(--main-color);
@@ -116,4 +118,152 @@ body {
       }
     }
   }
+}
+
+.featured {
+  height: 70vh;
+  position: relative;
+
+  .category {
+    position: absolute;
+    top: 80px;
+    left: 50px;
+    font-size: 35px;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    select {
+      cursor: pointer;
+      background-color: var(--main-color);
+      border: 1px solid white;
+      border-radius: none;
+      color: white;
+      padding: 5px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+
+  .featured-header {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info {
+    width: 35%;
+    position: absolute;
+    top: 24%;
+    left: 4%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .description {
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  button {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+
+  .play {
+    background-color: white;
+    padding-right: 35px;
+  }
+
+  .more {
+    color: white;
+    background-color: #cfcfcf2f;
+  }
+
+  .feat-icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .age-rating {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    right: -175%;
+    padding: 8px 70px 8px 8px;
+    background-color: #ffffff18;
+    border-left: 3px solid #bebebe;
+  }
+}
+
+.list {
+  width: 100%;
+  position: relative;
+  top: -175px;
+
+  .listTitle {
+    color: white;
+    font-size: 26px;
+    font-weight: 700;
+    margin-left: 65px;
+  }
+
+  .wrapper {
+    position: relative;
+
+    .sliderArrow {
+      width: 30px;
+      height: 30px;
+      color: white;
+      position: absolute;
+      transition: all 0.1s linear;
+      cursor: pointer;
+
+      &.left {
+        left: 15px;
+        top: 55px;
+      }
+
+      &.right {
+        right: 15px;
+        top: 55px;
+      }
+    }
+
+    .sliderArrow:hover {
+      transform: scale(1.2);
+    }
+
+    .container {
+      margin-left: 65px;
+      display: flex;
+      gap: 8px;
+      width: max-content;
+    }
+  }
+}
+
+.listItem {
+  width: 240px;
+  height: 140px;
+  background-color: rgba(255, 255, 255, 0.233);
+  border-radius: 3px;
 }
