@@ -1,9 +1,10 @@
-import Home from './home/Home';
+import Home from './pages/Home';
+import Watch from './pages/Watch';
 
 function App() {
   return (
     <div className='App'>
-      <Home />
+      <Watch />
     </div>
   );
 }
