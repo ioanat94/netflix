@@ -436,3 +436,92 @@ body {
     object-fit: cover;
   }
 }
+
+.register {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    url('./images/netflix_background.png') no-repeat;
+  background-size: cover;
+  color: white;
+
+  .top {
+    .wrapper {
+      padding: 25px 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .loginButton {
+      background-color: #d60101;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 3px;
+      padding: 6px 17px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+
+  .container {
+    width: 40%;
+    height: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: -50px;
+
+    h1 {
+      font-size: 60px;
+    }
+
+    h2 {
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    .input {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      input {
+        height: 61px;
+        width: 66%;
+        text-indent: 10px;
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      button {
+        height: 65px;
+        width: 33%;
+        background-color: #d60101;
+        color: white;
+        font-size: 30px;
+        border: none;
+        font-family: 'Roboto', sans-serif;
+        cursor: pointer;
+
+        &:hover {
+          background-color: red;
+        }
+      }
+    }
+  }
+}
