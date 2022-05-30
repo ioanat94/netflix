@@ -1,0 +1,624 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+:root {
+  --main-color: #141414;
+}
+
+.home {
+  background-color: var(--main-color);
+  overflow: hidden;
+}
+
+.navbar {
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+
+  &.scrolled {
+    background-color: var(--main-color);
+  }
+
+  .container {
+    height: 68px;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(360deg, transparent 0%, rgb(0, 0, 0, 0.8) 100%);
+
+    .left,
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .left {
+      img {
+        height: 25px;
+        margin-right: 25px;
+        cursor: pointer;
+      }
+
+      span {
+        transition: all 0.4s ease;
+
+        &:hover {
+          color: #8f8f8f;
+        }
+      }
+    }
+
+    .right {
+      .icon {
+        cursor: pointer;
+      }
+
+      .dropdown {
+        transition: all 0.4s ease;
+      }
+
+      .pfpicon:hover > .dropdown {
+        transform: rotate(180deg);
+      }
+
+      .options {
+        display: none;
+        background-color: var(--main-color);
+        padding: 20px;
+        right: 65px;
+        top: 52px;
+
+        .opt {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .opt:hover {
+          text-decoration: underline;
+        }
+
+        hr {
+          border: 0;
+          border-top: 1px solid #7e7e7e;
+          margin: 0 -20px;
+        }
+      }
+
+      .pfpicon:hover > .options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        position: absolute;
+      }
+
+      img {
+        height: 32px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.featured {
+  height: 70vh;
+  position: relative;
+
+  .category {
+    position: absolute;
+    top: 80px;
+    left: 50px;
+    font-size: 35px;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    select {
+      cursor: pointer;
+      background-color: var(--main-color);
+      border: 1px solid white;
+      border-radius: none;
+      color: white;
+      padding: 5px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+
+  .featured-header {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info {
+    width: 35%;
+    position: absolute;
+    top: 24%;
+    left: 4%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .description {
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  button {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+
+  .play {
+    background-color: white;
+    padding-right: 35px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.678);
+    }
+  }
+
+  .more {
+    color: white;
+    background-color: #cfcfcf2f;
+
+    &:hover {
+      background-color: #cfcfcf18;
+    }
+  }
+
+  .feat-icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .age-rating {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    right: -175%;
+    padding: 8px 70px 8px 8px;
+    background-color: #ffffff18;
+    border-left: 3px solid #bebebe;
+  }
+}
+
+.list {
+  width: 100%;
+  position: relative;
+  top: -175px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .listTitle {
+    color: white;
+    font-size: 26px;
+    font-weight: 700;
+    margin-left: 65px;
+  }
+
+  .wrapper {
+    position: relative;
+
+    .arrowWrapper {
+      width: 30px;
+      height: 100%;
+      padding: 0 15px;
+      color: white;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      transition: all 0.1s linear;
+      cursor: pointer;
+      z-index: 99;
+
+      &.left {
+        left: 0px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+
+      &.right {
+        right: 0px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+
+      &:hover {
+        background-color: rgb(22, 22, 22, 0.5);
+      }
+    }
+
+    .sliderArrow {
+      width: 30px;
+      height: 100%;
+      padding: 0 15px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      transition: all 0.1s linear;
+      cursor: pointer;
+      z-index: 99;
+
+      &.left {
+        left: 0px;
+      }
+
+      &.right {
+        right: 0px;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    .container {
+      margin-left: 65px;
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      transition: all 0.5s ease;
+    }
+  }
+}
+
+.listItem {
+  width: 240px;
+  height: 135px;
+  background-color: var(--main-color);
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  color: white;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  video {
+    width: 100%;
+    height: 202.5px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    z-index: 99;
+    width: 360px;
+    height: 360px;
+    position: absolute;
+    top: -120px;
+    box-shadow: -10px 0px 13px -7px #0000004f, 10px 0px 13px -7px #0000004f,
+      5px 5px 0px -30px rgba(0, 0, 0, 0), 0px 10px 13px -7px #0000004f;
+
+    img {
+      height: 202.5px;
+    }
+
+    .itemInfo {
+      margin-left: 20px;
+      width: 100%;
+      height: 157.5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .icons {
+        display: flex;
+        gap: 8px;
+
+        .play {
+          padding: 5px;
+          background-color: white;
+          color: var(--main-color);
+          border-radius: 50%;
+          font-size: 28px;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.678);
+          }
+        }
+
+        .add,
+        .thumbsUp {
+          padding: 5px;
+          border: 2px solid #818181;
+          border-radius: 50%;
+
+          &:hover {
+            border: 2px solid white;
+            background-color: #272727;
+          }
+        }
+      }
+
+      .itemInfoTop {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .match {
+          color: rgb(82, 212, 82);
+          font-weight: 700;
+        }
+
+        .duration {
+          font-weight: 700;
+        }
+
+        .bordered {
+          padding: 2px 8px;
+          border: 1px solid #8f8f8f;
+
+          &.hd {
+            font-size: 10px;
+          }
+        }
+      }
+
+      .tags {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 500;
+
+        .delimiter {
+          font-size: 30px;
+          color: #8f8f8f;
+        }
+      }
+    }
+  }
+}
+
+.watch {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  .back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.register {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    url('./images/netflix_background.png') no-repeat;
+  background-size: cover;
+  color: white;
+
+  .top {
+    .wrapper {
+      padding: 25px 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .loginButton {
+      background-color: #d60101;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 3px;
+      padding: 6px 17px;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+
+  .container {
+    width: 40%;
+    height: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: -50px;
+
+    h1 {
+      font-size: 60px;
+    }
+
+    h2 {
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    .input {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      input {
+        height: 61px;
+        width: 66%;
+        text-indent: 10px;
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      button {
+        height: 65px;
+        width: 33%;
+        background-color: #d60101;
+        color: white;
+        font-size: 30px;
+        border: none;
+        font-family: 'Roboto', sans-serif;
+        cursor: pointer;
+
+        &:hover {
+          background-color: red;
+        }
+      }
+    }
+  }
+}
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    url('./images/netflix_background.png') no-repeat;
+  background-size: cover;
+  color: white;
+
+  .top {
+    .wrapper {
+      padding: 25px 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .container {
+    width: 40%;
+    height: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -50px;
+
+    form {
+      width: 350px;
+      height: 550px;
+      padding: 30px;
+      border-radius: 5px;
+      background-color: #000000d2;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+      input {
+        height: 50px;
+        font-family: 'Roboto', sans-serif;
+        text-indent: 10px;
+        background-color: #333333;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        color: white;
+      }
+
+      button {
+        height: 50px;
+        background-color: #d60101;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      span {
+        color: #737373;
+        margin-top: 50px;
+
+        span {
+          color: white;
+
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+
+      small {
+        color: #737373;
+        margin-top: -25px;
+
+        span {
+          color: #005fc7;
+
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
