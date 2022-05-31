@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { json } = require('express');
 const Movie = require('../models/Movie');
 const verify = require('../verifyToken');
 
@@ -83,8 +82,6 @@ router.get('/random', verify, async (req, res) => {
   }
 });
 
-module.exports = router;
-
 // Get all
 router.get('/', verify, async (req, res) => {
   if (req.user.isAdmin) {
@@ -98,3 +95,5 @@ router.get('/', verify, async (req, res) => {
     res.status(403).json('Not authorized to view all movies');
   }
 });
+
+module.exports = router;
