@@ -30,7 +30,7 @@ function App() {
         />
         {user && (
           <>
-            <Route path='/movies' element={<Home type='movies' />} />
+            <Route path='/movies' element={<Home type='movie' />} />
             <Route path='/series' element={<Home type='series' />} />
             <Route path='/watch' element={<Watch />} />
           </>

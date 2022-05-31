@@ -1,7 +1,27 @@
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Featured({ type }) {
+  const [content, setContent] = useState({});
+
+  useEffect(() => {
+    const getRandomContent = async () => {
+      try {
+        const res = await axios.get(`/movies/random?type=${type}`, {
+          headers: {
+            token:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTQ5NGY5Y2I5YzgyMDM4ZjRiMzFmNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1Mzk5Nzc1MywiZXhwIjoxNjU0NDI5NzUzfQ.xnJCJcokygkObptwFedSngH-YoS_4EClKSFrGUNim14',
+          },
+        });
+        setContent(res.data[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRandomContent();
+  }, [type]);
+
   return (
     <div className='featured'>
       {type && (
@@ -26,21 +46,17 @@ function Featured({ type }) {
         </div>
       )}
       <img
-        src={require('../images/queens_gambit_header.jpg')}
+        src={content.image}
         alt='Featured Header'
         className='featured-header'
       />
       <div className='info'>
         <img
-          src={require('../images/queens_gambit_logo.webp')}
+          src={content.imageTitle}
           alt='Featured Title'
           className='featured-title'
         />
-        <span className='description'>
-          In a 1950s orphanage, a young girl reveals an astonishing talent for
-          chess and begins an unlikely journey to stardom while grappling with
-          addiction.
-        </span>
+        <span className='description'>{content.description}</span>
         <div className='buttons'>
           <button className='play'>
             <PlayArrow className='feat-icon' />
@@ -50,7 +66,7 @@ function Featured({ type }) {
             <InfoOutlined className='feat-icon' />
             <span>More Info</span>
           </button>
-          <span className='age-rating'>16+</span>
+          <span className='age-rating'>{content.limit}+</span>
         </div>
       </div>
     </div>
