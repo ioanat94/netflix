@@ -11,6 +11,11 @@ body {
   --main-color: #141414;
 }
 
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .home {
   background-color: var(--main-color);
   overflow: hidden;
