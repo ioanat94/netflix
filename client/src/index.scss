@@ -406,16 +406,11 @@ body {
         }
       }
 
-      .tags {
+      .genre {
         display: flex;
         align-items: center;
         gap: 5px;
         font-weight: 500;
-
-        .delimiter {
-          font-size: 30px;
-          color: #8f8f8f;
-        }
       }
     }
   }
