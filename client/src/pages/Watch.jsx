@@ -1,17 +1,23 @@
 import { ArrowBackOutlined } from '@mui/icons-material';
+import { Link, useLocation } from 'react-router-dom';
 import React from 'react';
 
 function Watch() {
+  const location = useLocation();
+  const movie = location.state.movie;
+
   return (
     <div className='watch'>
-      <div className='back'>
-        <ArrowBackOutlined />
-      </div>
+      <Link to='/'>
+        <div className='back'>
+          <ArrowBackOutlined />
+        </div>
+      </Link>
       <video
-        src={require('../videos/full_screen.mp4')}
+        src={movie.video}
         className='video'
         autoPlay
-        progress
+        progress='true'
         controls
       ></video>
     </div>

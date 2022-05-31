@@ -1,6 +1,7 @@
 import { Add, PlayArrow, ThumbUpOffAltOutlined } from '@mui/icons-material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function ListItem({ index, item }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -25,32 +26,34 @@ function ListItem({ index, item }) {
   }, [item]);
 
   return (
-    <div
-      className='listItem'
-      style={{ left: isHovered && moveDistance }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <img src={movie.imageSmall} alt='Show Preview' />
-      {isHovered && (
-        <>
-          <video src={movie.trailer} autoPlay muted loop />
-          <div className='itemInfo'>
-            <div className='icons'>
-              <PlayArrow className='play' />
-              <Add className='add' />
-              <ThumbUpOffAltOutlined className='thumbsUp' />
+    <Link to='/watch' state={{ movie }}>
+      <div
+        className='listItem'
+        style={{ left: isHovered && moveDistance }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <img src={movie.imageSmall} alt='Show Preview' />
+        {isHovered && (
+          <>
+            <video src={movie.trailer} autoPlay muted loop />
+            <div className='itemInfo'>
+              <div className='icons'>
+                <PlayArrow className='play' />
+                <Add className='add' />
+                <ThumbUpOffAltOutlined className='thumbsUp' />
+              </div>
+              <div className='itemInfoTop'>
+                <span className='bordered'>{movie.limit}+</span>
+                <span className='duration'>{movie.duration}</span>
+                <span className='bordered hd'>HD</span>
+              </div>
+              <div className='genre'>{movie.genre}</div>
             </div>
-            <div className='itemInfoTop'>
-              <span className='bordered'>{movie.limit}+</span>
-              <span className='duration'>{movie.duration}</span>
-              <span className='bordered hd'>HD</span>
-            </div>
-            <div className='genre'>{movie.genre}</div>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </Link>
   );
 }
 
