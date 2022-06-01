@@ -58,7 +58,7 @@
 }
 
 .productInfoItem {
-  width: 150px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
 }
@@ -77,11 +77,13 @@
 .productForm {
   display: flex;
   justify-content: space-between;
+  padding: 0 30px;
 }
 
 .productFormLeft {
   display: flex;
   flex-direction: column;
+  width: 30%;
 }
 
 .productFormLeft > label {
@@ -101,8 +103,8 @@
 }
 
 .productUploadImg {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 10px;
   object-fit: cover;
   margin-right: 20px;
@@ -111,7 +113,8 @@
 .productFormRight {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 30px;
 }
 
 .productUpload {
@@ -120,6 +123,7 @@
 }
 
 .productButton {
+  width: 80%;
   border: none;
   padding: 5px;
   border-radius: 5px;
