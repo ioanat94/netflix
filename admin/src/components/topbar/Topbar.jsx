@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import './topbar.css';
 import { NotificationsNone, Language } from '@material-ui/icons';
 import { logoutCall } from '../../context/authContext/apiCalls';
@@ -6,8 +7,11 @@ import { AuthContext } from '../../context/authContext/AuthContext';
 
 export default function Topbar() {
   const { dispatch } = useContext(AuthContext);
-  const handleLogout = () => {
+  const history = useHistory();
+  const handleLogout = (e) => {
+    e.preventDefault();
     logoutCall(dispatch);
+    history.push('/');
   };
 
   return (

@@ -1,11 +1,70 @@
 import { Link, useLocation } from 'react-router-dom';
 import './product.css';
-import { Publish } from '@material-ui/icons';
+import { useContext, useState } from 'react';
+import { updateMovie } from '../../context/movieContext/apiCalls';
+import { MovieContext } from '../../context/movieContext/MovieContext';
+import storage from '../../firebase';
 
 export default function Product() {
   const location = useLocation();
-  console.log(location);
   const movie = location.movie;
+
+  const [updatedMovie, setUpdatedMovie] = useState(movie);
+  const [image, setImage] = useState(null);
+  const [imageTitle, setImageTitle] = useState(null);
+  const [imageSmall, setImageSmall] = useState(null);
+  const [trailer, setTrailer] = useState(null);
+  const [video, setVideo] = useState(null);
+  const [uploaded, setUploaded] = useState(0);
+
+  const { dispatch } = useContext(MovieContext);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUpdatedMovie({ ...updatedMovie, [e.target.name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateMovie(updatedMovie._id, updatedMovie, dispatch);
+  };
+
+  const upload = (items) => {
+    items.forEach((item) => {
+      const fileName = new Date().getTime() + item.label + item.file.name;
+      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is' + progress + '% done');
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            setUpdatedMovie((prev) => {
+              return { ...prev, [item.label]: url };
+            });
+            setUploaded((prev) => prev + 1);
+          });
+        }
+      );
+    });
+  };
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    upload([
+      { file: image, label: 'image' },
+      { file: imageTitle, label: 'imageTitle' },
+      { file: imageSmall, label: 'imageSmall' },
+      { file: trailer, label: 'trailer' },
+      { file: video, label: 'video' },
+    ]);
+  };
 
   return (
     <div className='product'>
@@ -44,28 +103,114 @@ export default function Product() {
       <div className='productBottom'>
         <form className='productForm'>
           <div className='productFormLeft'>
-            <label>Movie title</label>
-            <input type='text' placeholder={movie.title} />
+            <label>Title</label>
+            <input
+              type='text'
+              placeholder={movie.title}
+              name='title'
+              onChange={handleChange}
+            />
+            <label>Description</label>
+            <input
+              type='text'
+              placeholder={movie.description}
+              name='description'
+              onChange={handleChange}
+            />
             <label>Year</label>
-            <input type='text' placeholder={movie.year} />
+            <input
+              type='text'
+              placeholder={movie.year}
+              name='year'
+              onChange={handleChange}
+            />
             <label>Genre</label>
-            <input type='text' placeholder={movie.genre} />
+            <input
+              type='text'
+              placeholder={movie.genre}
+              name='genre'
+              onChange={handleChange}
+            />
+            <label>Duration</label>
+            <input
+              type='text'
+              placeholder={movie.duration}
+              name='duration'
+              onChange={handleChange}
+            />
             <label>Age Limit</label>
-            <input type='text' placeholder={movie.limit} />
+            <input
+              type='text'
+              placeholder={movie.limit}
+              name='limit'
+              onChange={handleChange}
+            />
+            <label>Is Series?</label>
+            <select id='isSeries' name='isSeries' onChange={handleChange}>
+              <option value='false'>No</option>
+              <option value='true'>Yes</option>
+            </select>
             <label>Trailer</label>
-            <input type='file' placeholder={movie.trailer} />
+            <input
+              type='file'
+              placeholder={movie.trailer}
+              name='trailer'
+              onChange={(e) => setTrailer(e.target.files[0])}
+            />
             <label>Video</label>
-            <input type='file' placeholder={movie.video} />
+            <input
+              type='file'
+              placeholder={movie.video}
+              name='video'
+              onChange={(e) => setVideo(e.target.files[0])}
+            />
           </div>
           <div className='productFormRight'>
             <div className='productUpload'>
               <img src={movie.image} alt='' className='productUploadImg' />
-              <label for='file'>
-                <Publish fontSize='large' />
+              <label htmlFor='file'>
+                <input
+                  type='file'
+                  id='image'
+                  name='image'
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
               </label>
               <input type='file' id='file' style={{ display: 'none' }} />
             </div>
-            <button className='productButton'>Update</button>
+            <div className='productUpload'>
+              <img src={movie.imageTitle} alt='' className='productUploadImg' />
+              <label htmlFor='file'>
+                <input
+                  type='file'
+                  id='imageTitle'
+                  name='imageTitle'
+                  onChange={(e) => setImageTitle(e.target.files[0])}
+                />
+              </label>
+              <input type='file' id='file' style={{ display: 'none' }} />
+            </div>
+            <div className='productUpload'>
+              <img src={movie.imageSmall} alt='' className='productUploadImg' />
+              <label htmlFor='file'>
+                <input
+                  type='file'
+                  id='imageSmall'
+                  name='imageSmall'
+                  onChange={(e) => setImageSmall(e.target.files[0])}
+                />
+              </label>
+              <input type='file' id='file' style={{ display: 'none' }} />
+            </div>
+            {uploaded === 5 ? (
+              <button className='addProductButton' onClick={handleSubmit}>
+                Update
+              </button>
+            ) : (
+              <button className='addProductButton' onClick={handleUpload}>
+                Upload
+              </button>
+            )}
           </div>
         </form>
       </div>
