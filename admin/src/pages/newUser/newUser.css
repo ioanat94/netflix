@@ -1,9 +1,11 @@
 .newUser {
   flex: 4;
+  padding: 0 30px;
 }
 
 .newUserForm {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
@@ -42,6 +44,10 @@
 .newUserSelect {
   height: 40px;
   border-radius: 5px;
+}
+
+#profilePicture {
+  border: none;
 }
 
 .newUserButton {

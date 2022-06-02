@@ -121,6 +121,7 @@
 }
 
 .userUpdateRight {
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -144,6 +145,7 @@
 }
 
 .userUpdateButton {
+  width: 100px;
   border-radius: 5px;
   border: none;
   padding: 5px;

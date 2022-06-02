@@ -1,15 +1,64 @@
-import {
-  CalendarToday,
-  LocationSearching,
-  MailOutline,
-  PermIdentity,
-  PhoneAndroid,
-  Publish,
-} from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { MailOutline, SettingsApplicationsOutlined } from '@material-ui/icons';
+import { useContext, useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { UserContext } from '../../context/userContext/UserContext';
 import './user.css';
+import storage from '../../firebase';
+import { updateUser } from '../../context/userContext/apiCalls';
 
 export default function User() {
+  const history = useHistory();
+  const location = useLocation();
+  const user = location.user;
+
+  const [updatedUser, setUpdatedUser] = useState(user);
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [uploaded, setUploaded] = useState(0);
+
+  const { dispatch } = useContext(UserContext);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUpdatedUser({ ...updatedUser, [e.target.name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateUser(updatedUser._id, updatedUser, dispatch);
+    history.push('/users');
+  };
+
+  const upload = (items) => {
+    items.forEach((item) => {
+      const fileName = new Date().getTime() + item.label + item.file.name;
+      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is' + progress + '% done');
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+            setUpdatedUser((prev) => {
+              return { ...prev, [item.label]: url };
+            });
+            setUploaded((prev) => prev + 1);
+          });
+        }
+      );
+    });
+  };
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    upload([{ file: profilePicture, label: 'profilePicture' }]);
+  };
+
   return (
     <div className='user'>
       <div className='userTitleContainer'>
@@ -21,38 +70,23 @@ export default function User() {
       <div className='userContainer'>
         <div className='userShow'>
           <div className='userShowTop'>
-            <img
-              src='https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-              alt=''
-              className='userShowImg'
-            />
+            <img src={user.profilePicture} alt='' className='userShowImg' />
             <div className='userShowTopTitle'>
-              <span className='userShowUsername'>Anna Becker</span>
-              <span className='userShowUserTitle'>Software Engineer</span>
+              <span className='userShowUsername'>{user.username}</span>
             </div>
           </div>
           <div className='userShowBottom'>
-            <span className='userShowTitle'>Account Details</span>
-            <div className='userShowInfo'>
-              <PermIdentity className='userShowIcon' />
-              <span className='userShowInfoTitle'>annabeck99</span>
-            </div>
-            <div className='userShowInfo'>
-              <CalendarToday className='userShowIcon' />
-              <span className='userShowInfoTitle'>10.12.1999</span>
-            </div>
-            <span className='userShowTitle'>Contact Details</span>
-            <div className='userShowInfo'>
-              <PhoneAndroid className='userShowIcon' />
-              <span className='userShowInfoTitle'>+1 123 456 67</span>
-            </div>
+            <span className='userShowTitle'>Email</span>
             <div className='userShowInfo'>
               <MailOutline className='userShowIcon' />
-              <span className='userShowInfoTitle'>annabeck99@gmail.com</span>
+              <span className='userShowInfoTitle'>{user.email}</span>
             </div>
+            <span className='userShowTitle'>Is Admin?</span>
             <div className='userShowInfo'>
-              <LocationSearching className='userShowIcon' />
-              <span className='userShowInfoTitle'>New York | USA</span>
+              <SettingsApplicationsOutlined className='userShowIcon' />
+              <span className='userShowInfoTitle'>
+                {user.isAdmin ? 'Yes' : 'No'}
+              </span>
             </div>
           </div>
         </div>
@@ -64,56 +98,66 @@ export default function User() {
                 <label>Username</label>
                 <input
                   type='text'
-                  placeholder='annabeck99'
+                  name='username'
+                  placeholder='test.dev'
                   className='userUpdateInput'
-                />
-              </div>
-              <div className='userUpdateItem'>
-                <label>Full Name</label>
-                <input
-                  type='text'
-                  placeholder='Anna Becker'
-                  className='userUpdateInput'
+                  onChange={handleChange}
                 />
               </div>
               <div className='userUpdateItem'>
                 <label>Email</label>
                 <input
-                  type='text'
-                  placeholder='annabeck99@gmail.com'
+                  type='email'
+                  name='email'
+                  placeholder='test@gmail.com'
                   className='userUpdateInput'
+                  onChange={handleChange}
                 />
               </div>
               <div className='userUpdateItem'>
-                <label>Phone</label>
+                <label>Password</label>
                 <input
-                  type='text'
-                  placeholder='+1 123 456 67'
+                  type='password'
+                  name='password'
+                  placeholder='Password'
                   className='userUpdateInput'
+                  onChange={handleChange}
                 />
               </div>
               <div className='userUpdateItem'>
-                <label>Address</label>
-                <input
-                  type='text'
-                  placeholder='New York | USA'
-                  className='userUpdateInput'
-                />
+                <label>Is Admin?</label>
+                <select id='isAdmin' name='isAdmin' onChange={handleChange}>
+                  <option value='false'>No</option>
+                  <option value='true'>Yes</option>
+                </select>
               </div>
             </div>
             <div className='userUpdateRight'>
               <div className='userUpdateUpload'>
                 <img
                   className='userUpdateImg'
-                  src='https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+                  src={user.profilePicture}
                   alt=''
                 />
                 <label htmlFor='file'>
-                  <Publish className='userUpdateIcon' />
+                  <input
+                    type='file'
+                    id='profilePicture'
+                    name='profilePicture'
+                    onChange={(e) => setProfilePicture(e.target.files[0])}
+                  />
                 </label>
                 <input type='file' id='file' style={{ display: 'none' }} />
               </div>
-              <button className='userUpdateButton'>Update</button>
+              {uploaded === 1 ? (
+                <button className='addProductButton' onClick={handleSubmit}>
+                  Update
+                </button>
+              ) : (
+                <button className='addProductButton' onClick={handleUpload}>
+                  Upload
+                </button>
+              )}
             </div>
           </form>
         </div>

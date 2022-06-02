@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import './list.css';
 import { useContext, useEffect, useState } from 'react';
 import { ListContext } from '../../context/listContext/ListContext';
@@ -7,6 +7,7 @@ import { updateList } from '../../context/listContext/apiCalls';
 import { getMovies } from '../../context/movieContext/apiCalls';
 
 export default function List() {
+  const history = useHistory();
   const location = useLocation();
   const list = location.list;
 
@@ -32,6 +33,7 @@ export default function List() {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateList(updatedList._id, updatedList, dispatch);
+    history.push('/lists');
   };
 
   return (
