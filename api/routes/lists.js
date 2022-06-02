@@ -60,4 +60,37 @@ router.get('/', verify, async (req, res) => {
   }
 });
 
+// Get all
+router.get('/all', verify, async (req, res) => {
+  let list = [];
+  if (req.user.isAdmin) {
+    try {
+      list = await List.find();
+      res.status(200).json(list.reverse());
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json('Not authorized to view all lists');
+  }
+});
+
+// Update
+router.put('/:id', verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      const updatedList = await List.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true }
+      );
+      res.status(200).json(updatedList);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json('Not authorized to update lists');
+  }
+});
+
 module.exports = router;
