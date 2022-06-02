@@ -1,13 +1,17 @@
 import { InfoOutlined, PlayArrow } from '@mui/icons-material';
 import React from 'react';
 
-function Featured({ type }) {
+function Featured({ type, setGenre }) {
   return (
     <div className='featured'>
       {type && (
         <div className='category'>
           <span>{type === 'movie' ? 'Movies' : 'TV Shows'}</span>
-          <select name='genre' id='genre'>
+          <select
+            name='genre'
+            id='genre'
+            onChange={(e) => setGenre(e.target.value)}
+          >
             <option>Genres</option>
             <option value='adventure'>Adventure</option>
             <option value='comedy'>Comedy</option>
