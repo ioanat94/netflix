@@ -450,6 +450,10 @@ body {
   background-size: cover;
   color: white;
 
+  .logo {
+    cursor: pointer;
+  }
+
   .top {
     .wrapper {
       padding: 25px 55px;
