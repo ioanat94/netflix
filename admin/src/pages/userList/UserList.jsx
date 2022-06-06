@@ -44,7 +44,7 @@ export default function UserList() {
     },
     {
       field: 'action',
-      headerName: 'Action',
+      headerName: 'Actions',
       width: 150,
       renderCell: (params) => {
         return (
@@ -74,7 +74,6 @@ export default function UserList() {
         disableSelectionOnClick
         columns={columns}
         pageSize={10}
-        checkboxSelection
         getRowId={(r) => r._id}
       />
     </div>

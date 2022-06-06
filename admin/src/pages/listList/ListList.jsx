@@ -24,7 +24,7 @@ export default function ListList() {
     { field: 'type', headerName: 'Type', width: 120 },
     {
       field: 'action',
-      headerName: 'Action',
+      headerName: 'Actions',
       width: 150,
       renderCell: (params) => {
         return (
@@ -51,7 +51,6 @@ export default function ListList() {
         disableSelectionOnClick
         columns={columns}
         pageSize={10}
-        checkboxSelection
         getRowId={(r) => r._id}
       />
     </div>

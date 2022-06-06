@@ -38,7 +38,7 @@ export default function ProductList() {
     { field: 'isSeries', headerName: 'Is Series?', width: 140 },
     {
       field: 'action',
-      headerName: 'Action',
+      headerName: 'Actions',
       width: 150,
       renderCell: (params) => {
         return (
@@ -65,7 +65,6 @@ export default function ProductList() {
         disableSelectionOnClick
         columns={columns}
         pageSize={10}
-        checkboxSelection
         getRowId={(r) => r._id}
       />
     </div>

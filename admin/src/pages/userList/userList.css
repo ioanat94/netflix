@@ -1,5 +1,6 @@
 .userList {
   flex: 4;
+  padding-left: 20px;
 }
 
 .userListUser {

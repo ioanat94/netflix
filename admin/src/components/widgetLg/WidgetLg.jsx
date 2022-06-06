@@ -1,80 +1,55 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './widgetLg.css';
 
 export default function WidgetLg() {
-  const Button = ({ type }) => {
-    return <button className={'widgetLgButton ' + type}>{type}</button>;
-  };
+  const [newContent, setNewContent] = useState([]);
+
+  useEffect(() => {
+    const getNewContent = async () => {
+      try {
+        const res = await axios.get('/movies?new=true', {
+          headers: {
+            token:
+              'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
+          },
+        });
+        setNewContent(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getNewContent();
+  }, []);
+
   return (
     <div className='widgetLg'>
-      <h3 className='widgetLgTitle'>Latest transactions</h3>
+      <h3 className='widgetLgTitle'>Latest content</h3>
       <table className='widgetLgTable'>
         <tbody>
           <tr className='widgetLgTr'>
-            <th className='widgetLgTh'>Customer</th>
-            <th className='widgetLgTh'>Date</th>
-            <th className='widgetLgTh'>Amount</th>
-            <th className='widgetLgTh'>Status</th>
+            <th className='widgetLgTh'>Movie</th>
+            <th className='widgetLgTh'>Genre</th>
+            <th className='widgetLgTh'>Year</th>
+            <th className='widgetLgTh'>Age Limit</th>
+            <th className='widgetLgTh'>Is Series?</th>
           </tr>
-          <tr className='widgetLgTr'>
-            <td className='widgetLgUser'>
-              <img
-                src='https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                alt=''
-                className='widgetLgImg'
-              />
-              <span className='widgetLgName'>Susan Carol</span>
-            </td>
-            <td className='widgetLgDate'>2 Jun 2021</td>
-            <td className='widgetLgAmount'>$122.00</td>
-            <td className='widgetLgStatus'>
-              <Button type='Approved' />
-            </td>
-          </tr>
-          <tr className='widgetLgTr'>
-            <td className='widgetLgUser'>
-              <img
-                src='https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                alt=''
-                className='widgetLgImg'
-              />
-              <span className='widgetLgName'>Susan Carol</span>
-            </td>
-            <td className='widgetLgDate'>2 Jun 2021</td>
-            <td className='widgetLgAmount'>$122.00</td>
-            <td className='widgetLgStatus'>
-              <Button type='Declined' />
-            </td>
-          </tr>
-          <tr className='widgetLgTr'>
-            <td className='widgetLgUser'>
-              <img
-                src='https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                alt=''
-                className='widgetLgImg'
-              />
-              <span className='widgetLgName'>Susan Carol</span>
-            </td>
-            <td className='widgetLgDate'>2 Jun 2021</td>
-            <td className='widgetLgAmount'>$122.00</td>
-            <td className='widgetLgStatus'>
-              <Button type='Pending' />
-            </td>
-          </tr>
-          <tr className='widgetLgTr'>
-            <td className='widgetLgUser'>
-              <img
-                src='https://images.pexels.com/photos/4172933/pexels-photo-4172933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                alt=''
-                className='widgetLgImg'
-              />
-              <span className='widgetLgName'>Susan Carol</span>
-            </td>
-            <td className='widgetLgDate'>2 Jun 2021</td>
-            <td className='widgetLgAmount'>$122.00</td>
-            <td className='widgetLgStatus'>
-              <Button type='Approved' />
-            </td>
-          </tr>
+          {newContent.map((content) => (
+            <>
+              <tr className='widgetLgTr'>
+                <td className='widgetLgUser'>
+                  <img src={content.image} alt='' className='widgetLgImg' />
+                  <span className='widgetLgName'>{content.title}</span>
+                </td>
+                <td className='widgetLgDate'>{content.genre}</td>
+                <td className='widgetLgAmount'>{content.year}</td>
+                <td className='widgetLgAmount'>{content.limit}</td>
+                <td className='widgetLgAmount'>
+                  {content.isSeries ? 'Yes' : 'No'}
+                </td>
+              </tr>
+            </>
+          ))}
         </tbody>
       </table>
     </div>

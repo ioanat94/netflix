@@ -1,5 +1,6 @@
 .productList {
   flex: 4;
+  padding-left: 20px;
 }
 
 .productListItem {

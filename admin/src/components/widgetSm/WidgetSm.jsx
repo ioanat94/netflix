@@ -2,6 +2,7 @@ import './widgetSm.css';
 import { Visibility } from '@material-ui/icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function WidgetSm() {
   const [newUsers, setNewUsers] = useState([]);
@@ -40,10 +41,18 @@ export default function WidgetSm() {
             <div className='widgetSmUser'>
               <span className='widgetSmUsername'>{user.username}</span>
             </div>
-            <button className='widgetSmButton'>
-              <Visibility className='widgetSmIcon' />
-              Display
-            </button>
+            <Link
+              to={{
+                pathname: '/user/' + user._id,
+                user: user,
+              }}
+              style={{ textDecoration: 'none' }}
+            >
+              <button className='widgetSmButton'>
+                <Visibility className='widgetSmIcon' />
+                Display
+              </button>
+            </Link>
           </li>
         ))}
       </ul>
