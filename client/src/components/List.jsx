@@ -17,14 +17,25 @@ function List({ list }) {
     let distance = listRef.current.getBoundingClientRect().x - 15;
     if (direction === 'left' && slideNumber > 0) {
       setSlideNumber(slideNumber - 1);
-      listRef.current.style.transform = `translateX(${130 + distance}px)`;
+      if (window.innerWidth <= 480) {
+        listRef.current.style.transform = `translateX(${186 + distance}px)`;
+      } else if (window.innerWidth > 480 && window.innerWidth <= 768) {
+        listRef.current.style.transform = `translateX(${179 + distance}px)`;
+      } else {
+        listRef.current.style.transform = `translateX(${130 + distance}px)`;
+      }
     }
     if (direction === 'right' && slideNumber < 10 - clickLimit) {
       setSlideNumber(slideNumber + 1);
-      listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+      if (window.innerWidth <= 480) {
+        listRef.current.style.transform = `translateX(${-286 + distance}px)`;
+      } else if (window.innerWidth > 480 && window.innerWidth <= 768) {
+        listRef.current.style.transform = `translateX(${-279 + distance}px)`;
+      } else {
+        listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+      }
     }
   };
-  console.log(list);
 
   return (
     <div className='list'>

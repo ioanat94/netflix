@@ -28,6 +28,18 @@ body {
   }
 }
 
+@mixin ultraSmall {
+  @media (max-width: 380px) {
+    @content;
+  }
+}
+
+@mixin short {
+  @media (max-height: 800px) {
+    @content;
+  }
+}
+
 .home {
   background-color: var(--main-color);
   overflow: hidden;
@@ -53,11 +65,23 @@ body {
     justify-content: space-between;
     background: linear-gradient(360deg, transparent 0%, rgb(0, 0, 0, 0.8) 100%);
 
+    @include mobile {
+      padding: 0 20px;
+    }
+
+    @include ultraSmall {
+      padding: 0 10px;
+    }
+
     .left,
     .right {
       display: flex;
       align-items: center;
       gap: 22px;
+
+      @include ultraSmall {
+        gap: 10px;
+      }
 
       span {
         cursor: pointer;
@@ -71,7 +95,7 @@ body {
         cursor: pointer;
 
         @include mobile {
-          display: none;
+          margin-right: 0px;
         }
       }
 
@@ -156,6 +180,14 @@ body {
   height: 70vh;
   position: relative;
 
+  @include tablet {
+    height: 60vh;
+  }
+
+  @include mobile {
+    height: 50vh;
+  }
+
   .category {
     position: absolute;
     top: 80px;
@@ -193,12 +225,34 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @include tablet {
+      width: 65%;
+      top: 35%;
+    }
+
+    @include mobile {
+      width: 70%;
+      top: 30%;
+    }
+
+    @include short {
+      top: 20%;
+    }
   }
 
   .description {
-    color: white;
+    color: #f4f1e9;
     font-size: 20px;
     font-weight: 500;
+
+    @include tablet {
+      font-size: 18px;
+    }
+
+    @include mobile {
+      font-size: 16px;
+    }
   }
 
   .buttons {
@@ -210,7 +264,7 @@ body {
   button {
     font-family: 'Roboto', sans-serif;
     display: flex;
-    gap: 10px;
+    gap: 5px;
     align-items: center;
     font-size: 20px;
     font-weight: 700;
@@ -218,11 +272,29 @@ body {
     border-radius: 5px;
     padding: 5px 20px;
     cursor: pointer;
+
+    @include tablet {
+      font-size: 20px;
+      padding: 10px 10px;
+    }
+
+    @include mobile {
+      font-size: 16px;
+      padding: 5px 5px;
+    }
   }
 
   .play {
-    background-color: white;
+    background-color: #f4f1e9;
     padding-right: 35px;
+
+    @include tablet {
+      padding-right: 15px;
+    }
+
+    @include mobile {
+      padding-right: 15px;
+    }
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.678);
@@ -241,16 +313,33 @@ body {
   .feat-icon {
     height: 40px;
     width: 40px;
+
+    @include mobile {
+      height: 25px;
+      width: 25px;
+    }
   }
 
   .age-rating {
-    color: white;
+    color: #f4f1e9;
     font-size: 20px;
     position: absolute;
     right: -175%;
     padding: 8px 70px 8px 8px;
     background-color: #ffffff18;
     border-left: 3px solid #bebebe;
+
+    @include tablet {
+      right: -50%;
+      padding-right: 30px;
+      font-size: 16px;
+    }
+
+    @include mobile {
+      right: -40%;
+      padding-right: 30px;
+      font-size: 12px;
+    }
   }
 }
 
@@ -264,7 +353,7 @@ body {
   gap: 15px;
 
   .listTitle {
-    color: white;
+    color: #f4f1e9;
     font-size: 26px;
     font-weight: 700;
     margin-left: 65px;
@@ -277,7 +366,7 @@ body {
       width: 30px;
       height: 100%;
       padding: 0 15px;
-      color: white;
+      color: #f4f1e9;
       position: absolute;
       top: 0;
       bottom: 0;
@@ -345,7 +434,7 @@ body {
   border-radius: 3px;
   overflow: hidden;
   cursor: pointer;
-  color: white;
+  color: #f4f1e9;
   position: relative;
 
   img {
@@ -390,7 +479,7 @@ body {
 
         .play {
           padding: 5px;
-          background-color: white;
+          background-color: #f4f1e9;
           color: var(--main-color);
           border-radius: 50%;
           font-size: 28px;
@@ -517,17 +606,37 @@ body {
     text-align: center;
     margin-top: -50px;
 
+    @include tablet {
+      width: 80%;
+    }
+
+    @include mobile {
+      width: 90%;
+    }
+
     h1 {
       font-size: 60px;
+
+      @include mobile {
+        font-size: 50px;
+      }
     }
 
     h2 {
       font-size: 30px;
       font-weight: 400;
+
+      @include mobile {
+        font-size: 25px;
+      }
     }
 
     p {
       font-size: 20px;
+
+      @include mobile {
+        font-size: 16px;
+      }
     }
 
     .input {
@@ -552,6 +661,10 @@ body {
         border: none;
         font-family: 'Roboto', sans-serif;
         cursor: pointer;
+
+        @include mobile {
+          font-size: 20px;
+        }
 
         &:hover {
           background-color: red;
