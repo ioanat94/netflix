@@ -1,4 +1,4 @@
-import { ArrowDropDown, Notifications, Search } from '@mui/icons-material';
+import { ArrowDropDown } from '@mui/icons-material';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { logoutCall } from '../authContext/apiCalls';
@@ -27,20 +27,18 @@ const Navbar = () => {
             <span>Home</span>
           </Link>
           <Link to='/series' className='link'>
-            <span>TV Shows</span>
+            <span className='navbarmainLinks'>TV Shows</span>
           </Link>
           <Link to='/movies' className='link'>
-            <span>Movies</span>
+            <span className='navbarmainLinks'>Movies</span>
           </Link>
-          <span>New & Popular</span>
-          <span>My List</span>
         </div>
         <div className='right'>
-          <Search className='icon' />
-          <span>Kids</span>
-          <Notifications className='icon' />
           <span className='icon pfpicon'>
-            <img src={require('../images/cat_pfp.jpeg')} alt='Profile' />
+            <img
+              src={JSON.parse(localStorage.getItem('user')).profilePicture}
+              alt='Profile'
+            />
             <ArrowDropDown className='dropdown' />
             <div className='options'>
               <span className='opt' onClick={() => logoutCall(dispatch)}>

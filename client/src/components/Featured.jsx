@@ -1,7 +1,28 @@
-import { InfoOutlined, PlayArrow } from '@mui/icons-material';
-import React from 'react';
+import { PlayArrow } from '@mui/icons-material';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Featured({ type, setGenre }) {
+  const [movie, setMovie] = useState({});
+
+  useEffect(() => {
+    const getRandomMovie = async () => {
+      try {
+        const res = await axios.get(`/movies/random?type=${type}`, {
+          headers: {
+            token:
+              'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
+          },
+        });
+        setMovie(res.data[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRandomMovie();
+  }, [type]);
+
   return (
     <div className='featured'>
       {type && (
@@ -12,49 +33,44 @@ function Featured({ type, setGenre }) {
             id='genre'
             onChange={(e) => setGenre(e.target.value)}
           >
-            <option>Genres</option>
-            <option value='adventure'>Adventure</option>
-            <option value='comedy'>Comedy</option>
-            <option value='crime'>Crime</option>
-            <option value='fantasy'>Fantasy</option>
-            <option value='historical'>Historical</option>
-            <option value='horror'>Horror</option>
-            <option value='romance'>Romance</option>
-            <option value='sci-fi'>Sci-fi</option>
-            <option value='thriller'>Thriller</option>
-            <option value='western'>Western</option>
-            <option value='animation'>Animation</option>
-            <option value='drama'>Drama</option>
-            <option value='documentary'>Documentary</option>
+            <option value=''>Genres</option>
+            <option value='Action'>Action</option>
+            <option value='Anime'>Anime</option>
+            <option value='Comedy'>Comedy</option>
+            <option value='Crime'>Crime</option>
+            <option value='Documentary'>Documentary</option>
+            <option value='Drama'>Drama</option>
+            <option value='Fantasy'>Fantasy</option>
+            <option value='Horror'>Horror</option>
+            <option value='Romance'>Romance</option>
+            <option value='Thriller'>Thriller</option>
           </select>
         </div>
       )}
       <img
-        src={require('../images/queens_gambit_header.jpg')}
+        src={movie.image}
         alt='Featured Header'
         className='featured-header'
       />
       <div className='info'>
         <img
-          src={require('../images/queens_gambit_logo.webp')}
+          src={movie.imageTitle}
           alt='Featured Title'
           className='featured-title'
         />
-        <span className='description'>
-          In a 1950s orphanage, a young girl reveals an astonishing talent for
-          chess and begins an unlikely journey to stardom while grappling with
-          addiction.
-        </span>
+        <span className='description'>{movie.description}</span>
         <div className='buttons'>
-          <button className='play'>
-            <PlayArrow className='feat-icon' />
-            <span>Play</span>
-          </button>
-          <button className='more'>
-            <InfoOutlined className='feat-icon' />
-            <span>More Info</span>
-          </button>
-          <span className='age-rating'>16+</span>
+          <Link
+            to='/watch'
+            state={{ movie }}
+            style={{ textDecoration: 'none' }}
+          >
+            <button className='play'>
+              <PlayArrow className='feat-icon' />
+              <span>Play</span>
+            </button>
+          </Link>
+          <span className='age-rating'>{movie.limit}+</span>
         </div>
       </div>
     </div>

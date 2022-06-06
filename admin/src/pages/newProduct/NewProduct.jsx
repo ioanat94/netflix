@@ -1,8 +1,8 @@
-import './newProduct.css';
 import { useContext, useState } from 'react';
 import storage from '../../firebase';
 import { createMovie } from '../../context/movieContext/apiCalls';
 import { MovieContext } from '../../context/movieContext/MovieContext';
+import './newProduct.css';
 
 export default function NewProduct() {
   const [movie, setMovie] = useState(null);
@@ -27,27 +27,29 @@ export default function NewProduct() {
 
   const upload = (items) => {
     items.forEach((item) => {
-      const fileName = new Date().getTime() + item.label + item.file.name;
-      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is' + progress + '% done');
-        },
-        (err) => {
-          console.log(err);
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-            setMovie((prev) => {
-              return { ...prev, [item.label]: url };
+      if (item.file) {
+        const fileName = new Date().getTime() + item.label + item.file.name;
+        const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is' + progress + '% done');
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+              setMovie((prev) => {
+                return { ...prev, [item.label]: url };
+              });
+              setUploaded((prev) => prev + 1);
             });
-            setUploaded((prev) => prev + 1);
-          });
-        }
-      );
+          }
+        );
+      }
     });
   };
 

@@ -34,11 +34,11 @@ export default function NewList() {
   };
 
   return (
-    <div className='newProduct'>
-      <h1 className='addProductTitle'>New List</h1>
-      <form className='addProductForm'>
+    <div className='newList'>
+      <h1 className='addListTitle'>New List</h1>
+      <form className='addListForm'>
         <div className='formLeft'>
-          <div className='addProductItem'>
+          <div className='addListItem'>
             <label>Title</label>
             <input
               type='text'
@@ -47,7 +47,7 @@ export default function NewList() {
               onChange={handleChange}
             />
           </div>
-          <div className='addProductItem'>
+          <div className='addListItem'>
             <label>Genre</label>
             <input
               type='text'
@@ -56,7 +56,7 @@ export default function NewList() {
               onChange={handleChange}
             />
           </div>
-          <div className='addProductItem'>
+          <div className='addListItem'>
             <label>Type</label>
             <select name='type' onChange={handleChange}>
               <option>Type</option>
@@ -66,7 +66,7 @@ export default function NewList() {
           </div>
         </div>
         <div className='formRight'>
-          <div className='addProductItem'>
+          <div className='addListItem'>
             <label>Content</label>
             <select
               multiple
@@ -83,7 +83,7 @@ export default function NewList() {
           </div>
         </div>
       </form>
-      <button className='addProductButton' onClick={handleSubmit}>
+      <button className='addListButton' onClick={handleSubmit}>
         Create
       </button>
     </div>

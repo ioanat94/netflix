@@ -16,6 +16,18 @@ body {
   text-decoration: none;
 }
 
+@mixin tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
 .home {
   background-color: var(--main-color);
   overflow: hidden;
@@ -57,10 +69,24 @@ body {
         height: 25px;
         margin-right: 25px;
         cursor: pointer;
+
+        @include mobile {
+          display: none;
+        }
       }
 
       span {
         transition: all 0.4s ease;
+
+        @include tablet {
+          display: none;
+        }
+
+        &.navbarmainLinks {
+          @include tablet {
+            display: block;
+          }
+        }
 
         &:hover {
           color: #8f8f8f;
@@ -75,6 +101,11 @@ body {
 
       .dropdown {
         transition: all 0.4s ease;
+      }
+
+      .pfpicon img {
+        height: 35px;
+        width: 35px;
       }
 
       .pfpicon:hover > .dropdown {
@@ -157,7 +188,7 @@ body {
   .info {
     width: 35%;
     position: absolute;
-    top: 24%;
+    top: 45%;
     left: 4%;
     display: flex;
     flex-direction: column;
@@ -226,8 +257,8 @@ body {
 .list {
   width: 100%;
   position: relative;
-  top: -175px;
-  margin-bottom: 60px;
+  top: 20px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -600,8 +631,9 @@ body {
         color: #737373;
         margin-top: 50px;
 
-        span {
+        .signUpLink {
           color: white;
+          text-decoration: none;
 
           &:hover {
             text-decoration: underline;
@@ -614,8 +646,9 @@ body {
         color: #737373;
         margin-top: -25px;
 
-        span {
+        a {
           color: #005fc7;
+          text-decoration: none;
 
           &:hover {
             text-decoration: underline;

@@ -43,11 +43,22 @@ function Login() {
             Sign In
           </button>
           <span>
-            New to Netflix? <span>Sign up now</span>.
+            New to Netflix?{' '}
+            <Link to='/register' className='signUpLink'>
+              Sign up now
+            </Link>
+            .
           </span>
           <small>
             This page is protected by Google reCAPTCHA to ensure you're not a
-            bot. <span>Learn more.</span>
+            bot.{' '}
+            <a
+              href='https://www.google.com/recaptcha/about/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              Learn more.
+            </a>
           </small>
         </form>
       </div>

@@ -1,15 +1,15 @@
-.newProduct {
+.newList {
   flex: 4;
   padding: 0 30px;
 }
 
-.addProductForm {
+.addListForm {
   margin-top: 10px;
   display: flex;
   gap: 50px;
 }
 
-.addProductItem {
+.addListItem {
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -17,21 +17,21 @@
   width: 500px;
 }
 
-.addProductItem > label {
+.addListItem > label {
   color: gray;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.addProductItem > input {
+.addListItem > input {
   padding: 10px;
 }
 
-.addProductItem > select {
+.addListItem > select {
   padding: 10px;
 }
 
-.addProductButton {
+.addListButton {
   margin-top: 10px;
   width: 70px;
   height: 40px;
