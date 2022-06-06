@@ -22,17 +22,17 @@ app.use(express.json());
 // Accessing the path module
 const path = require('path');
 
+app.use('/auth', authRoute);
+app.use('/users', userRoute);
+app.use('/movies', movieRoute);
+app.use('/lists', listRoute);
+
 // Step 1:
 app.use(express.static(path.resolve(__dirname, './client/build')));
 // Step 2:
 app.get('*', function (request, response) {
   response.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
-
-app.use('/api/auth', authRoute);
-app.use('/api/users', userRoute);
-app.use('/api/movies', movieRoute);
-app.use('/api/lists', listRoute);
 
 const PORT = process.env.PORT || 5000;
 
