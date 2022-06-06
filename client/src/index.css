@@ -162,6 +162,11 @@ body {
   align-items: center;
   gap: 40px;
 }
+@media (max-width: 480px) {
+  .featured .category .featuredMovieType {
+    display: none;
+  }
+}
 .featured .category select {
   cursor: pointer;
   background-color: var(--main-color);
@@ -171,6 +176,13 @@ body {
   padding: 5px;
   font-size: 18px;
   font-weight: 700;
+}
+@media (max-width: 480px) {
+  .featured .category select {
+    padding: 5px 0 5px 5px;
+    margin-left: 200%;
+    font-size: 12px;
+  }
 }
 .featured .featured-header {
   width: 100%;
@@ -314,6 +326,16 @@ body {
   flex-direction: column;
   gap: 15px;
 }
+@media (max-width: 768px) {
+  .list {
+    left: -40px;
+  }
+}
+@media (max-width: 480px) {
+  .list {
+    left: -40px;
+  }
+}
 .list .listTitle {
   color: #f4f1e9;
   font-size: 26px;
@@ -341,10 +363,30 @@ body {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+@media (max-width: 768px) {
+  .list .wrapper .arrowWrapper.left {
+    left: 40px;
+  }
+}
+@media (max-width: 480px) {
+  .list .wrapper .arrowWrapper.left {
+    left: 40px;
+  }
+}
 .list .wrapper .arrowWrapper.right {
   right: 0px;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+}
+@media (max-width: 768px) {
+  .list .wrapper .arrowWrapper.right {
+    right: -40px;
+  }
+}
+@media (max-width: 480px) {
+  .list .wrapper .arrowWrapper.right {
+    right: -40px;
+  }
 }
 .list .wrapper .arrowWrapper:hover {
   background-color: rgba(22, 22, 22, 0.5);

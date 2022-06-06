@@ -27,7 +27,9 @@ function Featured({ type, setGenre }) {
     <div className='featured'>
       {type && (
         <div className='category'>
-          <span>{type === 'movie' ? 'Movies' : 'TV Shows'}</span>
+          <span className='featuredMovieType'>
+            {type === 'movie' ? 'Movies' : 'TV Shows'}
+          </span>
           <select
             name='genre'
             id='genre'

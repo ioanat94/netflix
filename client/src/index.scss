@@ -199,6 +199,12 @@ body {
     align-items: center;
     gap: 40px;
 
+    .featuredMovieType {
+      @include mobile {
+        display: none;
+      }
+    }
+
     select {
       cursor: pointer;
       background-color: var(--main-color);
@@ -208,6 +214,12 @@ body {
       padding: 5px;
       font-size: 18px;
       font-weight: 700;
+
+      @include mobile {
+        padding: 5px 0 5px 5px;
+        margin-left: 200%;
+        font-size: 12px;
+      }
     }
   }
 
@@ -352,6 +364,14 @@ body {
   flex-direction: column;
   gap: 15px;
 
+  @include tablet {
+    left: -40px;
+  }
+
+  @include mobile {
+    left: -40px;
+  }
+
   .listTitle {
     color: #f4f1e9;
     font-size: 26px;
@@ -379,12 +399,28 @@ body {
         left: 0px;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
+
+        @include tablet {
+          left: 40px;
+        }
+
+        @include mobile {
+          left: 40px;
+        }
       }
 
       &.right {
         right: 0px;
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
+
+        @include tablet {
+          right: -40px;
+        }
+
+        @include mobile {
+          right: -40px;
+        }
       }
 
       &:hover {
