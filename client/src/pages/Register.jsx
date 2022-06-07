@@ -50,7 +50,7 @@ function Register() {
           <div className='input'>
             <input type='email' placeholder='Email address' ref={emailRef} />
             <button className='registerButton' onClick={handleStart}>
-              Get Started &nbsp;&nbsp;〉
+              Get Started
             </button>
           </div>
         ) : (

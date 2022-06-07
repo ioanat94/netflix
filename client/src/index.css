@@ -117,6 +117,10 @@ body {
   align-items: center;
   gap: 10px;
 }
+.navbar .container .right .options .opt a {
+  text-decoration: none;
+  color: inherit;
+}
 .navbar .container .right .options .opt:hover {
   text-decoration: underline;
 }

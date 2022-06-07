@@ -44,6 +44,17 @@ const Navbar = () => {
             />
             <ArrowDropDown className='dropdown' />
             <div className='options'>
+              {JSON.parse(localStorage.getItem('user')).isAdmin && (
+                <span className='opt'>
+                  <a
+                    href='https://netflix-admin-dashboard.herokuapp.com/'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    Admin Dashboard
+                  </a>
+                </span>
+              )}
               <span className='opt' onClick={() => logoutCall(dispatch)}>
                 Sign out of Netflix
               </span>
