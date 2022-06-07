@@ -36,7 +36,10 @@ const Navbar = () => {
         <div className='right'>
           <span className='icon pfpicon'>
             <img
-              src={JSON.parse(localStorage.getItem('user')).profilePicture}
+              src={
+                JSON.parse(localStorage.getItem('user')).profilePicture ||
+                'https://firebasestorage.googleapis.com/v0/b/netflix-clone-49e41.appspot.com/o/items%2F1654582827926profilePicture30db479e1558c3ed46b4ed23b3cd98ae.jpg?alt=media&token=22e948b2-d8ef-4818-b2e4-ba34196b6c3b'
+              }
               alt='Profile'
             />
             <ArrowDropDown className='dropdown' />
