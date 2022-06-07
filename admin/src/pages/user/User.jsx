@@ -13,7 +13,6 @@ export default function User() {
 
   const [updatedUser, setUpdatedUser] = useState(user);
   const [profilePicture, setProfilePicture] = useState(null);
-  const [uploaded, setUploaded] = useState(0);
 
   const { dispatch } = useContext(UserContext);
 
@@ -37,7 +36,8 @@ export default function User() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is' + progress + '% done');
+          document.getElementById('uploadProgress').textContent =
+            'Upload is ' + progress.toFixed(2) + '% done';
         },
         (err) => {
           console.log(err);
@@ -47,7 +47,6 @@ export default function User() {
             setUpdatedUser((prev) => {
               return { ...prev, [item.label]: url };
             });
-            setUploaded((prev) => prev + 1);
           });
         }
       );
@@ -70,7 +69,14 @@ export default function User() {
       <div className='userContainer'>
         <div className='userShow'>
           <div className='userShowTop'>
-            <img src={user.profilePicture} alt='' className='userShowImg' />
+            <img
+              src={
+                user.profilePicture ||
+                'https://firebasestorage.googleapis.com/v0/b/netflix-clone-49e41.appspot.com/o/items%2F1654582827926profilePicture30db479e1558c3ed46b4ed23b3cd98ae.jpg?alt=media&token=22e948b2-d8ef-4818-b2e4-ba34196b6c3b'
+              }
+              alt=''
+              className='userShowImg'
+            />
             <div className='userShowTopTitle'>
               <span className='userShowUsername'>{user.username}</span>
             </div>
@@ -136,7 +142,10 @@ export default function User() {
               <div className='userUpdateUpload'>
                 <img
                   className='userUpdateImg'
-                  src={user.profilePicture}
+                  src={
+                    user.profilePicture ||
+                    'https://firebasestorage.googleapis.com/v0/b/netflix-clone-49e41.appspot.com/o/items%2F1654582827926profilePicture30db479e1558c3ed46b4ed23b3cd98ae.jpg?alt=media&token=22e948b2-d8ef-4818-b2e4-ba34196b6c3b'
+                  }
                   alt=''
                 />
                 <label htmlFor='file'>
@@ -149,15 +158,15 @@ export default function User() {
                 </label>
                 <input type='file' id='file' style={{ display: 'none' }} />
               </div>
-              {uploaded === 1 ? (
-                <button className='addProductButton' onClick={handleSubmit}>
-                  Update
-                </button>
-              ) : (
+              <div className='submitButtons'>
                 <button className='addProductButton' onClick={handleUpload}>
                   Upload
                 </button>
-              )}
+                <button className='addProductButton' onClick={handleSubmit}>
+                  Update
+                </button>
+              </div>
+              <div id='uploadProgress'></div>
             </div>
           </form>
         </div>

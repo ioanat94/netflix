@@ -124,7 +124,7 @@
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 30px;
 }
 
 .userUpdateUpload {
@@ -153,4 +153,9 @@
   background-color: darkblue;
   color: white;
   font-weight: 600;
+}
+
+.submitButtons {
+  display: flex;
+  gap: 20px;
 }

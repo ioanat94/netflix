@@ -33,7 +33,7 @@ export default function WidgetSm() {
             <img
               src={
                 user.profilePicture ||
-                'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png'
+                'https://firebasestorage.googleapis.com/v0/b/netflix-clone-49e41.appspot.com/o/items%2F1654582827926profilePicture30db479e1558c3ed46b4ed23b3cd98ae.jpg?alt=media&token=22e948b2-d8ef-4818-b2e4-ba34196b6c3b'
               }
               alt=''
               className='widgetSmImg'

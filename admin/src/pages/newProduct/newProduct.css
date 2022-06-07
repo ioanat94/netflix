@@ -44,3 +44,7 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+#uploadProgress0 {
+  margin-top: 20px;
+}

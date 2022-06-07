@@ -11,7 +11,6 @@ export default function NewProduct() {
   const [imageSmall, setImageSmall] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [video, setVideo] = useState(null);
-  const [uploaded, setUploaded] = useState(0);
 
   const { dispatch } = useContext(MovieContext);
 
@@ -26,7 +25,7 @@ export default function NewProduct() {
   };
 
   const upload = (items) => {
-    items.forEach((item) => {
+    items.forEach((item, key) => {
       if (item.file) {
         const fileName = new Date().getTime() + item.label + item.file.name;
         const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
@@ -35,7 +34,8 @@ export default function NewProduct() {
           (snapshot) => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is' + progress + '% done');
+            document.getElementById(`uploadProgress${[key]}`).textContent =
+              `Upload ${key + 1} is ` + progress.toFixed(2) + `% done`;
           },
           (err) => {
             console.log(err);
@@ -45,7 +45,6 @@ export default function NewProduct() {
               setMovie((prev) => {
                 return { ...prev, [item.label]: url };
               });
-              setUploaded((prev) => prev + 1);
             });
           }
         );
@@ -173,15 +172,19 @@ export default function NewProduct() {
           />
         </div>
       </form>
-      {uploaded === 5 ? (
-        <button className='addProductButton' onClick={handleSubmit}>
-          Create
-        </button>
-      ) : (
+      <div className='submitButtons'>
         <button className='addProductButton' onClick={handleUpload}>
           Upload
         </button>
-      )}
+        <button className='addProductButton' onClick={handleSubmit}>
+          Create
+        </button>
+      </div>
+      <div id='uploadProgress0'></div>
+      <div id='uploadProgress1'></div>
+      <div id='uploadProgress2'></div>
+      <div id='uploadProgress3'></div>
+      <div id='uploadProgress4'></div>
     </div>
   );
 }

@@ -61,3 +61,7 @@
   margin-top: 30px;
   cursor: pointer;
 }
+
+#uploadProgress {
+  margin-top: 20px;
+}

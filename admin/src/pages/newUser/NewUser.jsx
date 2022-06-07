@@ -10,7 +10,6 @@ export default function NewUser() {
 
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
-  const [uploaded, setUploaded] = useState(0);
 
   const { dispatch } = useContext(UserContext);
 
@@ -21,6 +20,7 @@ export default function NewUser() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(user);
     createUser(user, dispatch);
     history.push('/users');
   };
@@ -34,7 +34,8 @@ export default function NewUser() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is' + progress + '% done');
+          document.getElementById('uploadProgress').textContent =
+            'Upload is ' + progress.toFixed(2) + '% done';
         },
         (err) => {
           console.log(err);
@@ -44,7 +45,6 @@ export default function NewUser() {
             setUser((prev) => {
               return { ...prev, [item.label]: url };
             });
-            setUploaded((prev) => prev + 1);
           });
         }
       );
@@ -109,15 +109,15 @@ export default function NewUser() {
             onChange={(e) => setProfilePicture(e.target.files[0])}
           />
         </div>
-        {uploaded === 1 ? (
-          <button className='addProductButton' onClick={handleSubmit}>
-            Create
-          </button>
-        ) : (
+        <div className='submitButtons'>
           <button className='addProductButton' onClick={handleUpload}>
             Upload
           </button>
-        )}
+          <button className='addProductButton' onClick={handleSubmit}>
+            Create
+          </button>
+        </div>
+        <div id='uploadProgress'></div>
       </form>
     </div>
   );

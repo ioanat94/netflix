@@ -15,7 +15,6 @@ export default function Product() {
   const [imageSmall, setImageSmall] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [video, setVideo] = useState(null);
-  const [uploaded, setUploaded] = useState(0);
 
   const { dispatch } = useContext(MovieContext);
 
@@ -30,28 +29,30 @@ export default function Product() {
   };
 
   const upload = (items) => {
-    items.forEach((item) => {
-      const fileName = new Date().getTime() + item.label + item.file.name;
-      const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is' + progress + '% done');
-        },
-        (err) => {
-          console.log(err);
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-            setUpdatedMovie((prev) => {
-              return { ...prev, [item.label]: url };
+    items.forEach((item, key) => {
+      if (item.file) {
+        const fileName = new Date().getTime() + item.label + item.file.name;
+        const uploadTask = storage.ref(`/items/${fileName}`).put(item.file);
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            document.getElementById(`uploadProgress${[key]}`).textContent =
+              `Upload ${key + 1} is ` + progress.toFixed(2) + `% done`;
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+              setUpdatedMovie((prev) => {
+                return { ...prev, [item.label]: url };
+              });
             });
-            setUploaded((prev) => prev + 1);
-          });
-        }
-      );
+          }
+        );
+      }
     });
   };
 
@@ -202,15 +203,19 @@ export default function Product() {
               </label>
               <input type='file' id='file' style={{ display: 'none' }} />
             </div>
-            {uploaded === 5 ? (
-              <button className='addProductButton' onClick={handleSubmit}>
-                Update
-              </button>
-            ) : (
+            <div className='submitButtons'>
               <button className='addProductButton' onClick={handleUpload}>
                 Upload
               </button>
-            )}
+              <button className='addProductButton' onClick={handleSubmit}>
+                Update
+              </button>
+            </div>
+            <div id='uploadProgress0'></div>
+            <div id='uploadProgress1'></div>
+            <div id='uploadProgress2'></div>
+            <div id='uploadProgress3'></div>
+            <div id='uploadProgress4'></div>
           </div>
         </form>
       </div>
