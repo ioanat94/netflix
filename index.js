@@ -18,6 +18,14 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.json());
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
 // Accessing the path module
 const path = require('path');
