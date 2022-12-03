@@ -12,9 +12,9 @@
     A full-stack Netflix clone that comes with an admin dashboard.
     <br />
     <br />
-    <a href="https://netflix-clone-it.herokuapp.com/">View website</a>
+    <s><a href="https://netflix-clone-it.herokuapp.com/">View website</a>
      | 
-    <a href="https://netflix-admin-dashboard.herokuapp.com/">View admin dashboard</a>
+      <a href="https://netflix-admin-dashboard.herokuapp.com/">View admin dashboard</a></s>
     <br />
     <br />
     <i>Links currently unavailable due to Heroku shenanigans. They will be available again starting with January 1st.</i>
