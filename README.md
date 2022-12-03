@@ -17,7 +17,7 @@
     <a href="https://netflix-admin-dashboard.herokuapp.com/">View admin dashboard</a>
     <br />
     <br />
-    <strong>Note: Both apps are hosted on Heroku - please allow up to one minute for the dyno to 'wake up' and load the website.</strong>
+    <i>Links currently unavailable due to Heroku shenanigans. They will be available again starting with January 1st.</i>
   </p>
 </div>
 
