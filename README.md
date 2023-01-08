@@ -13,11 +13,9 @@
     <br />
     <br />
     <a href="https://netflix-clone-it.herokuapp.com/">View website</a>
-     | 
-      <a href="https://netflix-admin-dashboard.herokuapp.com/">View admin dashboard</a>
     <br />
     <br />
-    <strong>Note: Both apps are hosted on Heroku - please allow up to one minute for the dyno to 'wake up' and load the website.</strong>
+    <strong>Note: The app is hosted on Heroku - please allow up to one minute for the dyno to 'wake up' and load the website.</strong>
   </p>
 </div>
 
