@@ -12,10 +12,6 @@
     A full-stack Netflix clone that comes with an admin dashboard.
     <br />
     <br />
-    <a href="https://netflix-clone-it.herokuapp.com/">View website</a>
-    <br />
-    <br />
-    <strong>Note: The app is hosted on Heroku - please allow up to one minute for the dyno to 'wake up' and load the website.</strong>
   </p>
 </div>
 
